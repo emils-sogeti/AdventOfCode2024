@@ -14,7 +14,7 @@ while ((report = input.ReadLine()) is not null)
     var levels = report.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
     var lastLevelValue = int.Parse(levels[0]);
-    Console.WriteLine($"First level: {lastLevelValue}");
+    Console.WriteLine($"First level: {lastLevelValue}");            
     var isSafe = true;
     var trend = -2;
     foreach (var level in levels[1..])
