@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Reflection.Emit;
 
-Console.WriteLine("Day 2, Part 1!");
+Console.WriteLine("Day2, Part 2!");
 
 // Setup
 var input = File.OpenText(@".\input.csv");
@@ -14,9 +14,10 @@ while ((report = input.ReadLine()) is not null)
     var levels = report.Split(" ", StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
     var lastLevelValue = int.Parse(levels[0]);
-    Console.WriteLine($"First level: {lastLevelValue}");            
+    Console.WriteLine($"First level: {lastLevelValue}");
     var isSafe = true;
     var trend = -2;
+    var dampener = true;
     foreach (var level in levels[1..])
     {
         var levelValue = int.Parse(level);
@@ -34,8 +35,18 @@ while ((report = input.ReadLine()) is not null)
 
         if (!isSafe)
         {
-            // Unsafe
-            break;
+            if (dampener)
+            {
+                // Disregard the faulty level
+                isSafe = true;
+                // Only allowed once
+                dampener = false;
+            }
+            else
+            {
+                // Unsafe
+                break;
+            }
         }
         else
         {
